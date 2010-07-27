@@ -1,4 +1,7 @@
+#summary In this page you can found information about installation and configuration
 #labels Phase-Deploy,Featured
+#sidebar sideNavigation
+
 =Table of contents=
 <wiki:toc max_depth="3" />
 = Installation =
