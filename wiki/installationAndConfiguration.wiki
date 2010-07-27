@@ -29,6 +29,10 @@ By default the *engine_cudamrg* installs into `/usr/local/lib/engines`, if you w
 
 For example: if you want to install the engine into the directory `/opt` you must specify on the command-line something like this `--prefix=/opt`.
 
+Alternatevely you can download a more recent version from the svn repository using the `svn` command instead of `wget`:
+{{{
+svn checkout http://engine-cuda.googlecode.com/svn/trunk/ engine-cudamrg
+}}}
 =Configuration=
 == Using Engine_cudamrg with the openssl command ==
 
@@ -93,5 +97,5 @@ Options you can use with *engine_cudamrg*:
  * QUIET: Remove additional details
  * BUFFER_SIZE: Specifies the size of the buffer between central memory and GPU memory in kilobytes (default: 8MB)
 
-*WARNING:* if you use theese command with the `-post` option in an OpenSSL command shell or into the configuration file you will get an error like this:
+*WARNING:* if you use these command with the `-post` option in an OpenSSL command shell or into the configuration file you will get an error like this:
 `Error: you cannot set command 201 when the engine is already initialized.[Failure]: VERBOSE`.
