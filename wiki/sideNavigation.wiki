@@ -1,2 +1,5 @@
 #summary Side Bar Navigation
  * [installationAndConfiguration Installation & Configuration]
+ * [usageExample Usage & Testing Example ]
+ * [benchmarkVersion0.1.0 Benchmark - Version 0.1.0]
+*Warning:* this documentation is still under writing, please report any error.
