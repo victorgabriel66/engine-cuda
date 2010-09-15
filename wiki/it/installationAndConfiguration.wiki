@@ -1,0 +1,104 @@
+#summary In questa pagina è possibile trovare informazioni sull'installazione e la configurazione
+#labels Phase-Deploy,Featured
+#sidebar sideNavigation
+
+=Indice=
+<wiki:toc max_depth="3" />
+= Installazione =
+
+Prima di installare l'*engine_cudamrg* è necessario installare l'NVIDIA CUDA Toolkit come descritto nella documentazione ufficiale e installare l'OpenSSL toolkit.
+
+Riguardo l'installazione dell'NVIDIA CUDA Toolkit potete anche far riferimento a [http://www.mrgcorner.it/howto-linux/setting-up-the-cuda-development-environment/ questo mio post sul mio blog].
+
+L'installazione dell'*engine_cudamrg* è abbastanza semplice, seguono i comandi necessari:
+{{{
+wget http://engine-cuda.googlecode.com/files/engine_cudamrg-v_0.1.0.tar.gz
+tar xvzf engine_cudamrg-v_0.1.0.tar.gz 
+cd engine_cudamrg/
+./configure 
+make 
+make install
+}}}
+Se avete installato nel vostro sistema un driver video differente da quello scaricabile dal sito web di NVIDIA, come ad esempio quello fornito all'interno della vostra distribuzione, è necessario specificare il percorso alla libreria `libcuda.so` come opzione al comando `configure`.
+
+Per esempio: se la precedente libreria è contenuta nella directory `/usr/lib64/nvidia-current` è necessario aggiungere alla riga di comando di `configure` l'opzione `LDFLAGS=-L/usr/lib64/nvidia-current`, in altro caso lo script terminerà con un errore.
+
+Se state usando una versione di gcc superiore alla 4.4 e una versione del CUDA Toolkit inferiore alla 3.1 è necessario specificare tramite un'apposita opzione al comando `configure` il percorso ad una versione di gcc inferiore alla 4.4 per mezzo dell'opzione `--with-ccbin`.
+
+Per esempio: se avete gcc 4.3 installato nella directory `/usr/bin` è necessario aggiungere `--with-ccbin=/usr/bin/gcc-4.3`, in altro caso lo script terminerà con un errore.
+
+Di default l'*engine_cudamrg* si installa nella directory `/usr/local/lib/engines`, se volete installare l'engine in una directory differente è necessario specificare il percorso con l'opzione `--prefix` al commando `configure`.
+
+Per esempio: se volete installare l'engine nella directory `/opt` è necessario aggiungere `--prefix=/opt` alla linea di comando.
+
+In alternativa è possibile ottenere una versione più recente del codice attraverso il repository SVN usando il comando `svn` al posto di `wget`:
+{{{
+svn checkout http://engine-cuda.googlecode.com/svn/trunk/ engine-cudamrg
+}}}
+=Configurazione=
+== Usare Engine_cudamrg tramite il comando openssl ==
+
+Per farlo è necessario eseguire la shell di OpenSSL, caricare l'engine ed eseguire qualsiasi comando che utilizzi l'engine.
+
+Segue un breve esempio: 
+{{{
+$ openssl
+OpenSSL> engine -t dynamic -pre SO_PATH:/usr/local/lib/engines/libcudamrg.so -pre ID:cudamrg -pre LIST_ADD:1 -pre LOAD
+OpenSSL> enc -engine cudamrg -e -aes-256-ecb -k $YOUR_KEY -in $YOUR_INPUT_FILE -out $YOUR_OUTPUT_FILE -bufsize $BUFFER_SIZE
+}}}
+In questo esempio l'engine *engine_cudamrg* viene caricato.
+
+Il secondo comando cifra un file il cui nome è $YOUR_INPUT_FILE nel file $YOUR_OUTPUT_FILE utilizzando come chiave $YOUR_KEY e un buffer di dimensione $BUFFER_SIZE.
+
+== Usare Engine_cudamrg col file di configurazione di openssl ==
+
+L'utente ha la possibilità di creare o editare un file di configurazione per openssl in modo che non sia necessario digitare i comandi precedenti ogni volta.
+
+Qui di seguito un esempio di configurazione per OpenSSL 0.9.8:
+{{{
+openssl_conf = openssl_init
+
+[openssl_init]
+engines = engine_section
+
+[engine_section]
+cudamrg = cudamrg_section
+
+[cudamrg_section]
+engine_id = cudamrg
+dynamic_path = /usr/local/lib/engines/libcudamrg.so
+default_algorithms = ALL
+init = 1
+}}}
+
+Con questa configurazione è possibile invocare openssl utilizzando direttamente l'engine...
+{{{
+openssl enc -engine cudamrg -e -aes-256-ecb -k $YOUR_KEY -in $YOUR_INPUT_FILE -out $YOUR_OUTPUT_FILE -bufsize $BUFFER_SIZE
+}}}
+...oppure...
+{{{
+openssl -e -aes-256-ecb -k $YOUR_KEY -in $YOUR_INPUT_FILE -out $YOUR_OUTPUT_FILE -bufsize $BUFFER_SIZE
+}}}
+
+== Usare Engine_cudamrg con l'OpenSSL autoloading ==
+
+OpenSSL 0.9.8+ può automaticamente caricare gli engine.
+ 
+Se volete utilizzare questa feature è sufficente aggiungere un link simbolico alla libreria `libcudamrg.so` nella directory `lib/engines/` o installarla direttamente in quella directory.
+
+Dopodichè si potrà direttamente invocare openssl per utilizzare quell'engine...
+{{{
+openssl enc -engine cudamrg -e -aes-256-ecb -k $YOUR_KEY -in $YOUR_INPUT_FILE -out $YOUR_OUTPUT_FILE -bufsize $BUFFER_SIZE
+}}}
+
+== Opzioni di Engine_cudamrg ==
+
+Segue una breve lista delle opzioni utilizzabili con *engine_cudamrg*:
+ * SO_PATH: specifica il percorso alla libreria condivisa `cuda-engine`
+ * VERBOSE: mostra informazioni aggiuntive
+ * QUIET: rimuove qualsiasi output
+ * BUFFER_SIZE: specifica la dimensione del buffer fra memoria centrale e memoria della GPU in kilobyte (default: 8MB)
+
+*ATTENZIONE:* se usi questi comandi con l'opzione `-post` nella shell di OpenSSL o all'interno del file di configurazione otterrete il seguente errore:
+`Error: you cannot set command 201 when the engine is already initialized.[Failure]: VERBOSE`.
+Si tratta di un problema noto che verrà risolto nelle prossime release.

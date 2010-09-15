@@ -1,0 +1,4 @@
+#summary menù di navigazione
+ * [installationAndConfiguration Installazione & Configurazione]
+ * [usageExample Esempi di utilizzo & testing]
+*Attenzione:* questa documentazione è ancora in fase di scrittura, per favore riportate ogni errore.
