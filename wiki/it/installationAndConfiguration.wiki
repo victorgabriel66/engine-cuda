@@ -101,4 +101,5 @@ Segue una breve lista delle opzioni utilizzabili con *engine_cudamrg*:
 
 *ATTENZIONE:* se usi questi comandi con l'opzione `-post` nella shell di OpenSSL o all'interno del file di configurazione otterrete il seguente errore:
 `Error: you cannot set command 201 when the engine is already initialized.[Failure]: VERBOSE`.
+
 Si tratta di un problema noto che verrà risolto nelle prossime release.

@@ -59,13 +59,13 @@ La directory `test-enc` contiene tre script di shell che eseguono il test e scri
 
 Se avete l'`engine_cudamrg` e la versione ricompilata di OpenSSL impostate correttamente è sufficiente cambiare la variabile 'OPENSSL' all'interno degli script `test-enc-cpu.sh` e `test-enc-gpu.sh` in modo che contenga il percorso all'eseguibile openssl.
 
-Dopodichè è necessario eseguire `test-enc-gpu.sh`, ricompilare l'engine con l'opzione `--enable-cpuonly`, eseguire lo script `test-enc-cpu.sh` ed eseguire lo script `test-enc-plot.sh` per diagrammare i risultati. Alla fine ricordatevi di ricompilare l`engine senza l'opzione `--enable-cpuonly`.
+Dopodichè è necessario eseguire `test-enc-gpu.sh`, ricompilare l'engine con l'opzione `--enable-cpuonly`, eseguire lo script `test-enc-cpu.sh` ed eseguire lo script `test-enc-plot.sh` per diagrammare i risultati. Alla fine ricordatevi di ricompilare l'engine senza l'opzione `--enable-cpuonly`.
 
 Questi script di shell producono come output 24 file, 4 per per ogni cifrario (cifratura e decifratura, sia per CPU che per GPU), al termine è possibile diagrammare i risultati se volete.
 
 ==Eseguire test-speed==
 La directory `test-speed` contiene tre script di shell che eseguono il test e scrivono il risultato su disco più altri quattro script che diagrammano il risultato.
 
-Se avete l'`engine_cudamrg` e la versione ricompilata di OpenSSL impostate correttamente l'unica cosa che dovete fare è modificare la variabile 'OPENSSL' in modo che contenga il percoroso all'eseguibile di openssl.
+Se avete l'`engine_cudamrg` e la versione ricompilata di OpenSSL impostate correttamente l'unica cosa che dovete fare è modificare la variabile 'OPENSSL' in modo che contenga il percorso all'eseguibile di openssl.
 
 Questi script di shell producono come output 24 file, 4 per per ogni cifrario (cifratura e decifratura, sia per CPU che per GPU), alla fine diagrammano i risultati.
