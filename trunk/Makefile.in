@@ -33,8 +33,8 @@ NVCPPFLAGS= @NVCPPFLAGS@
 
 CFLAGS= @CFLAGS@
 
-NVCFLAGS_LIBS = @NVCFLAGS@ --compiler-options '-Wall -fPIC'
-NVCFLAGS_TEST = @NVCFLAGS@ --compiler-options '-Wall'
+NVCFLAGS_LIBS = @NVCFLAGS@ --compiler-options '@CFLAGS@'
+NVCFLAGS_TEST = @NVCFLAGS@ --compiler-options '@CFLAGS_TEST@'
 
 LIBS_TEST = @LIBS_TEST@
 LIBS_LIBS = @LIBS@
@@ -64,7 +64,7 @@ install: lib
 	cp $(LIBNAME) @prefix@/@ENGINEDIR@
 
 clean:
-	rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff *.linkinfo *.so *.a teststate
+	rm -f *.o *.obj lib tags core .pure *.out .nfs* *.old *.bak fluff *.linkinfo *.so *.a teststate
 
 distclean: clean
 	rm -f config.* Makefile
