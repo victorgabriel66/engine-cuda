@@ -886,7 +886,7 @@ __global__ void AESencKernel(uint32_t state[]) {
 	Tes2[threadIdx.x+4*threadIdx.y]=Te2[threadIdx.x+4*threadIdx.y];
 	Tes3[threadIdx.x+4*threadIdx.y]=Te3[threadIdx.x+4*threadIdx.y];
 
-	__syncthreads();	// __threadfence_block() could be enought
+	__syncthreads();	// __threadfence_block() could be enough
 	
 	s[threadIdx.x+4*threadIdx.y] = state[blockIdx.x*MAX_THREAD+threadIdx.x+4*threadIdx.y] ^ tex1Dfetch(texref_dk,threadIdx.x);
 
@@ -974,7 +974,7 @@ __global__ void AESdecKernel(uint32_t state[]) {
 	Tds3[threadIdx.x+4*threadIdx.y]=Td3[threadIdx.x+4*threadIdx.y];
 	Tds4[threadIdx.x+4*threadIdx.y]=Td4[threadIdx.x+4*threadIdx.y];
 
-	__syncthreads();	// __threadfence_block() could be enought
+	__syncthreads();	// __threadfence_block() could be enough
 
 	s[threadIdx.x+4*threadIdx.y] = state[blockIdx.x*MAX_THREAD+threadIdx.x+4*threadIdx.y] ^ tex1Dfetch(texref_dk,threadIdx.x);
 
@@ -1389,7 +1389,7 @@ __global__ void AESdecKernel_cbc(uint32_t in[],uint32_t out[],uint32_t iv[]) {
 	Tds3[threadIdx.x+4*threadIdx.y]=Td3[threadIdx.x+4*threadIdx.y];
 	Tds4[threadIdx.x+4*threadIdx.y]=Td4[threadIdx.x+4*threadIdx.y];
 
-	__syncthreads();	// __threadfence_block() could be enought
+	__syncthreads();	// __threadfence_block() could be enough
 
 	s[threadIdx.x+4*threadIdx.y] = in[blockIdx.x*MAX_THREAD+threadIdx.x+4*threadIdx.y] ^ tex1Dfetch(texref_dk,threadIdx.x);
 
@@ -1619,7 +1619,7 @@ __global__ void AESencKernel_cbc(uint32_t state[],uint32_t iv[],size_t length) {
 		Tes3[threadIdx.x+i]=Te3[threadIdx.x+i];
 		}
 
-	__syncthreads();	// __threadfence_block() could be enought
+	__syncthreads();	// __threadfence_block() could be enough
 
 	current[threadIdx.x]=0;
 
