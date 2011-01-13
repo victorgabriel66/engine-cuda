@@ -15,9 +15,9 @@ Con la versione 0.1.0 di `engine_cudamrg` è necessario ricompilare l'OpenSSL to
 Nel seguente esempio procederemo a scaricare, modificare, compilare e installare l'OpenSSL tookit, useremo `/opt` come directory d'installazione sia per l'OpenSSL toolkit che per l'`engine_cudamrg` ma è possibile scegliere qualsiasi directory di destinazione vogliate.
 {{{
  $ wget http://www.openssl.org/source/openssl-0.9.8k.tar.gz
- $ wget http://engine-cuda.googlecode.com/files/engine_cudamrg-v_0.1.0.tar.gz
+ $ wget http://engine-cuda.googlecode.com/files/engine_cudamrg-v_0.1.1.tar.gz
  $ tar xvzf openssl-0.9.8k.tar.gz 
- $ tar xvzf engine_cudamrg-v_0.1.0.tar.gz 
+ $ tar xvzf engine_cudamrg-v_0.1.1.tar.gz 
  $ patch ./openssl-0.9.8k/apps/speed.c ./engine_cudamrg/openssl-patch/openssl-0.9.8.k-apps_speed.c.patch 
  $ patch ./openssl-0.9.8k/crypto/evp/bio_enc.c ./engine_cudamrg/openssl-patch/openssl-0.9.8.k-crypto_evp_bio_c.c.patch 
  $ cd openssl-0.9.8k/
@@ -71,10 +71,10 @@ Se avete l'`engine_cudamrg` e la versione ricompilata di OpenSSL impostate corre
 Questi script di shell producono come output 24 file, 4 per per ogni cifrario (cifratura e decifratura, sia per CPU che per GPU), alla fine diagrammano i risultati, se si vuole è possibile costruire delle tabelle in formato html, wiki e csv dai dati utilizzati per disegnare i grafici con lo script `make-table-speed.sh`.
 
 == Esecuzione test-file ==
-La directory `test-file`contiene uno script di shell che esegue il test e scrive a schermo il risultato.
+La directory `test-file` contiene uno script di shell che esegue il test e scrive a schermo il risultato.
 
 Per eseguire correttamente il test è necessario specificare con la variabile 'INPUT_FILE' e 'INPUT_DIR' un file esistente e la directory che lo contiene, opzionalmente è possibile specificare anche un nome per il file di output con la variabile 'OUTPUT_FILE' e specificare una dimensione del buffer con la variabile 'BUFSIZE'.
 
 Se avete `engine_cudamrg` e la versione ricompilata di OpenSSL impostata correttamente è sufficiente modificare la variabile 'OpenSSL' nello script in modo che punti al file eseguibile openssl.
 
-Lo script di shell cifra e decifra il file fornito con tutti i cifrari supportati e confrontare l`md5 dei file decifrati con l`md5 del file originale, i file temporanei vengono memorizzati nella directory specificata con la variabile 'OUTPUT_DIR'.
+Lo script di shell cifra e decifra il file fornito con tutti i cifrari supportati e confrontare l'md5 dei file decifrati con l'md5 del file originale, i file temporanei vengono memorizzati nella directory specificata con la variabile 'OUTPUT_DIR'.

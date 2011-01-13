@@ -10,16 +10,16 @@ Before installing the *engine_cudamrg* you MUST install the NVIDIA CUDA Toolkit 
 
 Installing *engine_cudamrg* is quite simple:
 {{{
-wget http://engine-cuda.googlecode.com/files/engine_cudamrg-v_0.1.0.tar.gz
-tar xvzf engine_cudamrg-v_0.1.0.tar.gz 
+wget http://engine-cuda.googlecode.com/files/engine_cudamrg-v_0.1.1.tar.gz
+tar xvzf engine_cudamrg-v_0.1.1.tar.gz 
 cd engine_cudamrg/
 ./configure 
 make 
 make install
 }}}
-~~If you install a driver different from the one provided by the NVIDIA web site you MUST specify the path to the `libcuda.so` library on the `configure` command-line.
+~~If you install a driver different from the one provided by the NVIDIA web site you MUST specify the path to the `libcuda.so` library on the `configure` command-line.~~
 
-For example: if you have the library into the directory `/usr/lib64/nvidia-current` you MUST add to the command-line something like this `LDFLAGS=-L/usr/lib64/nvidia-current`, in other case the script will fail.~~
+~~For example: if you have the library into the directory `/usr/lib64/nvidia-current` you MUST add to the command-line something like this `LDFLAGS=-L/usr/lib64/nvidia-current`, in other case the script will fail.~~
 
 If your distribution has a version of gcc above 4.4 and a version of the CUDA Toolkit below 3.1 you MUST specify on the `configure` command-line the path to a version of gcc below 4.4 throutgh the `--with-ccbin option`.
 
