@@ -18,7 +18,7 @@ The test is executed ad described into the page [usageExample] of this wiki.
 =AES ECB encryption performance=
  
 [http://engine-cuda.googlecode.com/svn/wiki/aes-ecb-encrypt-011.png]
- 
+
 || *blocksize* || *aes-128-ecb-gpu* || *aes-128-ecb-cpu* || *aes-192-ecb-gpu* || *aes-192-ecb-cpu* || *aes-256-ecb-gpu* || *aes-256-ecb-cpu* ||
 || *16* || 461557.33 || 177335186.62 || 431845.33 || 153509736.45 || 409685.62 || 134258349.16 ||
 || *64* || 1543253.33 || 196224832.00 || 1415722.67 || 166770538.67 || 1314069.33 || 145240277.33 ||
@@ -37,7 +37,7 @@ The test is executed ad described into the page [usageExample] of this wiki.
 || *2097152* || 967486122.67 || 204122794.67 || 916272451.01 || 171966464.00 || 867521877.33 || 149596842.67 ||
 || *4194304* || 824879786.67 || 204122794.67 || 788529152.00 || 171966464.00 || 754974720.00 || 149596842.67 ||
 || *8388608* || 768955733.33 || 203444645.85 || 740993706.67 || 171083452.63 || 710235477.33 || 149008168.42 ||
- 
+
 The "numbers" in the column "blocksize" are in bytes.
  
 All other "numbers" are in bytes per second processed.
@@ -45,7 +45,7 @@ All other "numbers" are in bytes per second processed.
 =AES ECB decryption performance=
  
 [http://engine-cuda.googlecode.com/svn/wiki/aes-ecb-decrypt-011.png]
- 
+
 || *blocksize* || *aes-128-ecb-gpu* || *aes-128-ecb-cpu* || *aes-192-ecb-gpu* || *aes-192-ecb-cpu* || *aes-256-ecb-gpu* || *aes-256-ecb-cpu* ||
 || *16* || 452018.73 || 165531943.81 || 422010.67 || 144689942.47 || 401424.00 || 127585300.33 ||
 || *64* || 1532125.75 || 186063232.00 || 1400234.67 || 159375946.49 || 1304554.67 || 139123820.74 ||
@@ -64,7 +64,7 @@ All other "numbers" are in bytes per second processed.
 || *2097152* || 959796565.33 || 194284650.17 || 909701051.51 || 164276906.67 || 866306748.99 || 143784668.90 ||
 || *4194304* || 824833027.42 || 194336085.33 || 782936746.67 || 163883401.32 || 752178517.33 || 143526017.28 ||
 || *8388608* || 768955733.33 || 193583261.54 || 737860837.46 || 163883401.32 || 706999737.79 || 143083280.27 ||
- 
+
 The "numbers" in the column "blocksize" are in bytes.
  
 All other "numbers" are in bytes per second processed.
@@ -80,7 +80,7 @@ If you want you can re-enable it on the configure command line.
 =AES CBC decryption performance=
  
 [http://engine-cuda.googlecode.com/svn/wiki/aes-cbc-decrypt-011.png]
- 
+
 || *blocksize* || *aes-128-cbc-gpu* || *aes-128-cbc-cpu* || *aes-192-cbc-gpu* || *aes-192-cbc-cpu* || *aes-256-cbc-gpu* || *aes-256-cbc-cpu* ||
 || *16* || 412293.33 || 100462753.18 || 387722.67 || 91504957.86 || 369968.00 || 84898734.45 ||
 || *64* || 1088554.67 || 160217706.67 || 978304.00 || 139517120.00 || 902185.95 || 124445141.33 ||
@@ -99,7 +99,7 @@ If you want you can re-enable it on the configure command line.
 || *2097152* || 837462698.67 || 199961004.65 || 790302582.55 || 169304962.13 || 724216490.67 || 148198741.33 ||
 || *4194304* || 763363328.00 || 199993303.31 || 725614592.00 || 169438770.86 || 685069653.33 || 148694389.30 ||
 || *8388608* || 735401301.33 || 199333259.41 || 702302065.12 || 168879567.00 || 668859109.63 || 147706386.71 ||
- 
+
 The "numbers" in the column "blocksize" are in bytes.
  
 All other "numbers" are in bytes per second processed.
