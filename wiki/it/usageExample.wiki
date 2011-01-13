@@ -68,4 +68,13 @@ La directory `test-speed` contiene tre script di shell che eseguono il test e sc
 
 Se avete l'`engine_cudamrg` e la versione ricompilata di OpenSSL impostate correttamente l'unica cosa che dovete fare è modificare la variabile 'OPENSSL' in modo che contenga il percorso all'eseguibile di openssl.
 
-Questi script di shell producono come output 24 file, 4 per per ogni cifrario (cifratura e decifratura, sia per CPU che per GPU), alla fine diagrammano i risultati.
+Questi script di shell producono come output 24 file, 4 per per ogni cifrario (cifratura e decifratura, sia per CPU che per GPU), alla fine diagrammano i risultati, se si vuole è possibile costruire delle tabelle in formato html, wiki e csv dai dati utilizzati per disegnare i grafici con lo script `make-table-speed.sh`.
+
+== Esecuzione test-file ==
+La directory `test-file`contiene uno script di shell che esegue il test e scrive a schermo il risultato.
+
+Per eseguire correttamente il test è necessario specificare con la variabile 'INPUT_FILE' e 'INPUT_DIR' un file esistente e la directory che lo contiene, opzionalmente è possibile specificare anche un nome per il file di output con la variabile 'OUTPUT_FILE' e specificare una dimensione del buffer con la variabile 'BUFSIZE'.
+
+Se avete `engine_cudamrg` e la versione ricompilata di OpenSSL impostata correttamente è sufficiente modificare la variabile 'OpenSSL' nello script in modo che punti al file eseguibile openssl.
+
+Lo script di shell cifra e decifra il file fornito con tutti i cifrari supportati e confrontare l`md5 dei file decifrati con l`md5 del file originale, i file temporanei vengono memorizzati nella directory specificata con la variabile 'OUTPUT_DIR'.

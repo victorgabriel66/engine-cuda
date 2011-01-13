@@ -2,4 +2,5 @@
  * [installationAndConfiguration Installation & Configuration]
  * [usageExample Usage & Testing Example ]
  * [benchmarkVersion010 Benchmark - Version 0.1.0]
+ * [benchmarkVersion011 Benchmark - Version 0.1.1]
 *Warning:* this documentation is still under writing, please report any error.

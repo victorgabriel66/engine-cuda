@@ -1,5 +1,5 @@
 #summary BenchmarkVersion0.1.0
-#labels Featured,Phase-QA
+#labels Phase-QA
 #sidebar sideNavigation
 
 =Table of contents=
@@ -17,7 +17,7 @@ The test is executed ad described into the page [usageExample] of this wiki.
 
 =AES ECB encryption performance=
 
-[http://engine-cuda.googlecode.com/svn/wiki/aes-ecb-encrypt.png]
+[http://engine-cuda.googlecode.com/svn/wiki/aes-ecb-encrypt-010.png]
 
 || *blocksize* || *aes-128-ecb-gpu* || *aes-128-ecb-cpu* || *aes-192-ecb-gpu* || *aes-192-ecb-cpu* || *aes-256-ecb-gpu* || *aes-256-ecb-cpu* ||
 || *16* || 446271.57 || 178262789.33 || 415989.33 || 153246924.41 || 396458.67 || 134421264.00 ||
@@ -44,7 +44,7 @@ All other "numbers" are in bytes per second processed.
  
 =AES ECB decryption performance=
 
-[http://engine-cuda.googlecode.com/svn/wiki/aes-ecb-decrypt.png] 
+[http://engine-cuda.googlecode.com/svn/wiki/aes-ecb-decrypt-010.png] 
 
 || *blocksize* || *aes-128-ecb-gpu* || *aes-128-ecb-cpu* || *aes-192-ecb-gpu* || *aes-192-ecb-cpu* || *aes-256-ecb-gpu* || *aes-256-ecb-cpu* ||
 || *16* || 423034.67 || 166311653.33 || 413264.00 || 144198618.67 || 393168.00 || 126336467.77 ||
@@ -71,7 +71,7 @@ All other "numbers" are in bytes per second processed.
  
 =AES CBC encryption performance=
 
-[http://engine-cuda.googlecode.com/svn/wiki/aes-cbc-encrypt.png]
+[http://engine-cuda.googlecode.com/svn/wiki/aes-cbc-encrypt-010.png]
 
 || *blocksize* || *aes-128-cbc-gpu* || *aes-128-cbc-cpu* || *aes-192-cbc-gpu* || *aes-192-cbc-cpu* || *aes-256-cbc-gpu* || *aes-256-cbc-cpu* ||
 || *16* || 400485.33 || 128118742.47 || 369754.67 || 115114986.67 || 353728.43 || 103381386.67 ||
@@ -98,7 +98,7 @@ All other "numbers" are in bytes per second processed.
 
 =AES CBC decryption performance=
 
-[http://engine-cuda.googlecode.com/svn/wiki/aes-cbc-decrypt.png]
+[http://engine-cuda.googlecode.com/svn/wiki/aes-cbc-decrypt-010.png]
 
 || *blocksize* || *aes-128-cbc-gpu* || *aes-128-cbc-cpu* || *aes-192-cbc-gpu* || *aes-192-cbc-cpu* || *aes-256-cbc-gpu* || *aes-256-cbc-cpu* ||
 || *16* || 422709.33 || 99953509.33 || 397152.00 || 91636576.00 || 377322.67 || 83952042.67 ||

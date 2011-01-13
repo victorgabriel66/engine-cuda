@@ -61,11 +61,20 @@ If you have the `engine_cudamrg` and the rebuilded version of OpenSSL set up cor
 
 After that you must execute the `test-enc-gpu.sh`, than rebuild the engine with the option `--enable-cpuonly`, execute the script `test-enc-cpu.sh` and execute the script `test-enc-plot.sh` for plotting the result. At the end remember to rebuild the engine without the option `--enable-cpuonly`.
 
-These shell scripts produce as output 24 file, 4 for every cipher (encryption and decryption for both CPU and GPU), at the end you can plot the result if you want. 
+These shell scripts produce as output 24 file, 4 for every cipher (encryption and decryption for both CPU and GPU), at the end you can plot the result if you want.
 
 ==Running test-speed==
 The directory `test-speed` contains one shell script that execute the test and writes to disk the result and other four script that plot the result.
 
 If you have the `engine_cudamrg` and the rebuilded version of OpenSSL set up correctly the only thing that you must do is modify the variable 'OPENSSL' into the script to point to the openssl executable.
 
-The shell script produce as output 24 file, 4 for every cipher (encryption and decryption for both CPU and GPU), at the end it plot the result. 
+The shell script produce as output 24 file, 4 for every cipher (encryption and decryption for both CPU and GPU), at the end it plot the result, you can also build tables in html, csv and wiki with the data used to draw the graphs using the script `make-table-speed.sh`.
+
+==Running test-file==
+The directory `test-file` contains one shell script that executes the test and writes to screen the result.
+
+In order to execute correctly the test you MUST specify the variable 'INPUT_FILE' and 'INPUT_DIR' to a existing file and at the directory that contains it, optionally you could specify also a name for the output file with the variable 'OUTPUT_FILE' and specify a buffer size with the variable 'BUFSIZE'.
+
+If you have the `engine_cudamrg` and the rebuilded version of OpenSSL set up correctly you MUST is modify the variable 'OPENSSL' into the script to point to the openssl executable.
+
+The shell`s script encrypts and decrypts the provided file with all supported ciphers and compare the md5 of the decrypted file with the md5 of the original file, temporary file are stored into the directory specified with the variable 'OUTPUT_DIR'.
