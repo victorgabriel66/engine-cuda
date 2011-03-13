@@ -1,5 +1,5 @@
 #
-# @version 0.1.1 (2010)
+# @version 0.1.2 (2010)
 # @author Paolo Margara <paolo.margara@gmail.com>
 # 
 # Copyright 2010 Paolo Margara
@@ -36,8 +36,7 @@ CFLAGS= @CFLAGS@
 NVCFLAGS_LIBS = @NVCFLAGS@ --compiler-options '@CFLAGS@'
 NVCFLAGS_TEST = @NVCFLAGS@ --compiler-options '@CFLAGS_TEST@'
 
-LIBS_TEST = @LIBS_TEST@
-LIBS_LIBS = @LIBS@
+LIBS = @LIBS@
 
 LIBNAME = libcudamrg.so
 TESTNAME= teststate
@@ -45,26 +44,60 @@ TESTNAME= teststate
 LIBSRC = e_cuda.c aes_cuda.cu
 TESTSRC= teststate.c aes_cuda.cu
 
+SOURCES= aes_cuda.cu e_cuda.c teststate.c
+HEADERS= aes_cuda.h
+OTHERFILES= configure COPYING openssl.cnf.example README CHANGES configure.in Makefile.in
+OTHER_DIRS= openssl-patch test-enc test-speed test-file
+OTHER_DIRS_CONTENT= openssl-patch/openssl-0.9.8.k-apps_speed.c.patch test-enc/aes-ecb-decrypt.plt test-enc/test-enc-plot.sh test-speed/aes-ecb-decrypt.plt \
+	openssl-patch/openssl-0.9.8.k-crypto_evp_bio_enc.c.patch test-enc/aes-ecb-encrypt.plt test-file/test-file.sh test-speed/aes-ecb-encrypt.plt test-enc/aes-cbc-decrypt.plt \
+	test-enc/test-enc-cpu.sh test-speed/aes-cbc-decrypt.plt test-enc/aes-cbc-encrypt.plt test-enc/test-enc-gpu.sh test-speed/aes-cbc-encrypt.plt test-speed/test-speed.sh          
+ALLFILES=$(SOURCES) $(HEADERS) $(OTHERFILES) $(OTHER_DIRS)
+distdir= @DISTDIR@
+tarname= @TARNAME@
+
 LIBOBJ = e_cuda.o aes_cuda.o
 TESTOBJ= aes_cuda.o teststate.o
 
 all:	lib test
 
 test: $(TESTSRC)
-	$(NVCC) $(NVCPPFLAGS) $(NVCFLAGS_TEST) $(NVLDFLAGS) $(LIBS_TEST) -o $(TESTNAME) $(TESTSRC)
+	$(NVCC) $(NVCPPFLAGS) $(NVCFLAGS_TEST) $(NVLDFLAGS) $(LIBS) -o $(TESTNAME) $(TESTSRC)
 
 lib:	$(LIBOBJ)
-	$(CC) -shared -Wl,-soname,$(LIBNAME) $(CFLAGS_LIBS) $(CPPFLAGS) $(LDFLAGS) $(LIBS_LIBS) -o $(LIBNAME) $(LIBOBJ)
+	$(CC) -shared -Wl,-soname,$(LIBNAME) $(CFLAGS_LIBS) $(CPPFLAGS) $(LDFLAGS) $(LIBS) -o $(LIBNAME) $(LIBOBJ)
 
 aes_cuda.o: aes_cuda.cu
-	$(NVCC) $(NVCPPFLAGS) $(NVCFLAGS_LIBS) -c -o aes_cuda.o aes_cuda.cu 
+	$(NVCC) $(NVCPPFLAGS) $(NVCFLAGS_LIBS) -c -o $@ aes_cuda.cu 
 
 install: lib
 	mkdir -p @prefix@/@ENGINEDIR@
 	cp $(LIBNAME) @prefix@/@ENGINEDIR@
+	chmod 644 @prefix@/@ENGINEDIR@/$(LIBNAME)
+
+uninstall:
+	-rm -f @prefix@/@ENGINEDIR@/$(LIBNAME)
+	
 
 clean:
 	rm -f *.o *.obj lib tags core .pure *.out .nfs* *.old *.bak fluff *.linkinfo *.so *.a teststate
 
-distclean: clean
+distclean: clean FORCE
 	rm -f config.* Makefile
+
+dist: $(tarname)
+
+$(tarname): $(distdir)
+	tar cvzf $(tarname) $(distdir)
+	rm -rf $(distdir)
+
+$(distdir): $(ALLFILES) FORCE
+	mkdir -p $(distdir)
+	cp $(SOURCES) $(HEADERS) $(OTHERFILES) $(distdir)
+	for i in $(OTHER_DIRS); do mkdir -p $(distdir)/$$i; done
+	for i in $(OTHER_DIRS_CONTENT); do cp $$i $(distdir)/$$i; done
+
+FORCE:
+	-rm -rf $(distdir)
+	-rm -f $(tarname)
+
+.PHONY: all clean distclean dist FORCE install uninstall
